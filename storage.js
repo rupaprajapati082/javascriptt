@@ -52,8 +52,14 @@ let btn = document.querySelector("button");
 let body = document.querySelector("body");
 
 //localStorage--> value ---> classlist.add(theme)
-if(body.classList.add(localStorage.getItem("theme")) === "dark"){
-body.classList.add(localStorage.getItem("theme"));
+if (localStorage.getItem("theme") === "dark") {
+  body.className = "";
+  body.classList.add(localStorage.getItem("theme"));
+  btn.textContent = "Light Mode";
+  btn.style.color = "#222";
+  btn.style.backgroundColor = "#555";
+  localStorage.setItem("theme", "dark");
+
 }
 btn.addEventListener("click", () => {
     console.log("button clicked");
