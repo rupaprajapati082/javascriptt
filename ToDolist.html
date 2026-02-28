@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0px;
+            box-sizing: border-box;
+            background-color: rgb(5, 2, 29);
+        }
+        #main{
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            color: yellow;
+            flex-direction: column;
+           margin-top: 4rem;
+            row-gap: 2rem;
+        }
+        #task_inp{
+        outline: none;
+        border: none;
+        background-color: rgb(58, 177, 233);
+        padding: 5px 10px;
+        border-radius: 24px;
+        color: black;
+        }
+        .add_task{
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: rgb(228, 231, 24);
+            color: rgb(187, 13, 255);
+            border: none;
+        }
+        .task_list{
+            /* display: flex;
+            row-gap: 1rem;
+            flex-direction: column;
+           justify-self: space-between; */
+            color: white;
+        }
+     
+        .delete{
+            padding: 5px 10px;
+            border-radius: 7px;
+            background-color: rgb(230, 229, 233);
+            color: rgb(255, 1, 1);
+            border: none;
+            margin-left: 10px;
+        }
+        .task_list li {
+            margin: 10px 0;
+        }
+        .task_list li input {
+            margin: 10px;
+        }
+        .error{
+            color: red;
+        }
+        .line{
+text-decoration-style: dashed;        
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div id ="main">
+        <h1>Task Management System</h1>
+        <div>
+            <input type="text" id="task_inp" placeholder="Add you Task"/>
+            <button class="add_task">Add Task</button>
+        </div>
+        <ul type="none" class="task_list">
+            <!-- <li><input type="checkbox" />Task 1<button class="delete">Delete</button></li>
+             <li><input type="checkbox" />Task 2<button class="delete">Delete</button></li>
+              <li><input type="checkbox" />Task 3 <button class="delete">Delete</button></li>
+               <li><input type="checkbox" />Task 4<button class="delete">Delete</button></li>
+                <li><input type="checkbox" />Task 5<button class="delete">Delete</button></li> -->
+        </ul>
+    </div>
+    <script src="todo.js"></script>
+</body>
+</html>
