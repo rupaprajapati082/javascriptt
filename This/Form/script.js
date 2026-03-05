@@ -4,85 +4,84 @@ let role = document.querySelector("input[name='role']");
 let bio = document.querySelector("input[name='bio']");
 let img = document.querySelector("input[name='img']");
 
-// methode with this keyword
-const UserManager ={
-    users :[],
-    // font event 
+const UserManager = {
+
+    users: [],
+
     init: function(){
-        // console.log("this value",this);
-        form.addEventListener("submit",this.submit.bind(this));
+
+        form.addEventListener("submit", this.submit.bind(this));
+
+        // load data from localStorage
+        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+        this.users = storedUsers;
+
+        this.renderUi();
     },
-    // submit method 
+
     submit: function(e){
         e.preventDefault();
-        console.log("form submitted");
-        console.log("submit",this);//window
         this.addUser();
     },
 
-    // add user method
-addUser: function(){
-    console.log("add users", this);
-    this.users.push({
-        username: username.value,
-        role: role.value,
-        bio: bio.value,
-        img:img.value,
-    });
-    console.log(this.users);
-    form.reset();
-    this.renderUi();
-},
+    addUser: function(){
 
-    // render ui
-    renderUi: function(){
-        console.log(this.users);
-        let div = document.querySelector(".users");
-        console.log("div");
-        div.innerHTML= "";
+        const user = {
+            username: username.value,
+            role: role.value,
+            bio: bio.value,
+            img: img.value
+        };
 
-        this.users.forEach((data)=>{
-        div.innerHTML += `<div class="card max-w-1/4 w-full text-center border border-blue-900 rounded-2xl p-8 my-4 mx-4 shadow-xl">
-    <div class="src" alt=""></div>
-    <img src="${data.img}" 
-    alt="image" 
-    class = "w-72 h-72 object-cover rounded-full border-5 border-blue-400" />
+        this.users.push(user);
 
-    <h2 class="text-3xl text-red-500 my-2 font-bold">${data.username}</h2>
-    <p class="text-xl text-black-300 my-2 font-semibold">${data.role}</p>
-    <p class="text-lg text-blue-500 my-2 font-medium">
-       ${data.bio}
-    </p>
-    </div>`
-    });
+        // save in localStorage
+        localStorage.setItem("users", JSON.stringify(this.users));
+
+        form.reset();
+
+        this.renderUi();
     },
+
+    renderUi: function(){
+
+        let div = document.querySelector(".users");
+
+        div.innerHTML = "";
+
+        this.users.forEach((data, index) => {
+
+            div.innerHTML += `
+            <div class="text-center border border-blue-500 rounded-2xl p-6 shadow-lg bg-white">
+
+                <img src="${data.img}"
+                class="w-20 h-20 object-cover rounded-full mx-auto mb-4 border-4 border-blue-400">
+
+                <h2 class="text-2xl font-bold text-red-500">${data.username}</h2>
+
+                <p class="text-lg font-semibold">${data.role}</p>
+
+                <p class="text-blue-500 mt-2">${data.bio}</p>
+
+                <button onclick="UserManager.deleteUser(${index})"
+                class="bg-red-500 text-white px-3 py-1 mt-4 rounded">
+                Delete
+                </button>
+
+            </div>`;
+        });
+
+    },
+
+    deleteUser: function(index){
+
+        this.users.splice(index,1);
+
+        localStorage.setItem("users", JSON.stringify(this.users));
+
+        this.renderUi();
+    }
+
 };
+
 UserManager.init();
-
-
-
-function saveData(users) {
-  let data = JSON.parse(localStorage.getItem("notes")) || [];
-  data.push(users);
-
-  localStorage.setItem("notes", JSON.stringify(data));
-}
-saveData({
-    username,role,bio,img,
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
